@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { body } = require('express-validator');
 const { authRequired } = require('../middleware/auth.middleware');
+const { handleValidationErrors } = require('../middleware/validation.middleware');
 const {
   listTasks,
   getTask,
@@ -19,6 +20,7 @@ router.get('/:id', getTask);
 router.post(
   '/',
   [body('title').notEmpty().withMessage('El título es requerido')],
+  handleValidationErrors,
   createTask
 );
 

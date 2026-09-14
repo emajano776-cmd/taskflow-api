@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const { body } = require('express-validator');
 const { authRequired } = require('../middleware/auth.middleware');
+const { handleValidationErrors } = require('../middleware/validation.middleware');
 const {
   listCategorias,
   getCategoria,
@@ -19,12 +20,14 @@ router.get('/:id', getCategoria);
 router.post(
   '/',
   [body('name').notEmpty().withMessage('El nombre es requerido')],
+  handleValidationErrors,
   createCategoria
 );
 
 router.put(
   '/:id',
   [body('name').optional().notEmpty().withMessage('El nombre no puede estar vacío')],
+  handleValidationErrors,
   updateCategoria
 );
 
