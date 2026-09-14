@@ -5,6 +5,7 @@ const { validationResult } = require('express-validator');
 
 const authRoutes = require('./routes/auth.routes');
 const taskRoutes = require('./routes/tasks.routes');
+const categoriaRoutes = require('./routes/categorias.routes');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.get('/health', (req, res) => res.json({ status: 'ok' }));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
+app.use('/api/categorias', categoriaRoutes);
 
 // Manejador de errores de validación centralizado (usar en rutas si se desea)
 app.use((err, req, res, next) => {
